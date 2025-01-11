@@ -1,30 +1,165 @@
-# Blinkit_sales_analysis
-This project demonstrates the integration of Power BI and MySQL to create a comprehensive and interactive business intelligence dashboard. The dashboard is designed to provide actionable insights into key performance metrics for Blinkit, a conceptual "last-minute app," addressing an imaginary real-world business problem.
+# **Blinkit Sales Analytics Dashboard**
 
-Using AI-generated data, the dashboard analyzes sales, outlet performance, and item categories, delivering a visual story that enables better decision-making for stakeholders. This project highlights essential data analytics skills, including advanced SQL query design, data modeling in Power BI, and effective visualization techniques.
+This project demonstrates a **Power BI Sales Analytics Dashboard** for Blinkit, "India's Last Minute App." It offers interactive visualizations and detailed insights into sales performance, outlet-wise contributions, and product-level trends to support data-driven decision-making.
 
-Key Insights
-Sales Analysis:
+---
 
-Total sales of $1.20M, with average sales per item at $141.
-Breakdown by fat content shows significant contributions from both low-fat and regular items.
-Outlet Performance:
+## **Overview**
 
-Tier 3 outlets contributed the highest sales at $472K.
-Insights into outlet establishment trends over time reveal sales growth patterns.
-Item Trends:
+The Blinkit Sales Analytics Dashboard provides actionable insights into key sales metrics, helping stakeholders monitor performance and optimize business strategies. By analyzing trends in sales, outlet performance, and product categories, this project enables effective decision-making for growth and customer satisfaction.
 
-Fruits and snacks lead item sales, contributing $0.18M each.
-A detailed view of item visibility and sales efficiency across outlet types.
-Filterable Metrics:
+---
 
-The dashboard allows slicing data by outlet location, outlet size, and item type, offering customized perspectives for deeper analysis.
-Tools & Approach
-MySQL was used to extract and prepare structured data through optimized SQL queries.
-Power BI was leveraged to transform raw data into actionable insights through dynamic visuals, DAX calculations, and interactive filters.
-The project employed AI-generated data to simulate business scenarios, ensuring a realistic yet hypothetical use case.
-Objectives Achieved
-Skill Showcase: Demonstrates proficiency in Power BI, SQL, and data visualization.
-Problem-Solving: Tackles a conceptual business challenge with a data-driven approach.
-Practical Demonstration: Provides an engaging, interactive experience for stakeholders to explore and derive insights.
-This dashboard serves as a robust example of how modern data analytics tools can be used to address business problems and empower strategic decision-making. It is an ideal showcase of technical and analytical capabilities for real-world applications.
+## **Features**
+
+1. **Interactive Dashboard**:
+   - Filters for Outlet Location Type, Outlet Size, and Item Type.
+   - Dynamic visualizations to analyze key metrics.
+
+2. **Visualized Metrics**:
+   - **Total Sales**: Tracks overall sales performance.
+   - **Average Sales**: Measures sales efficiency across outlets.
+   - **Number of Items Sold**: Evaluates product-level contributions.
+   - **Average Ratings**: Tracks customer satisfaction by product.
+
+3. **Visualizations**:
+   - Donut charts for fat content and outlet size contributions.
+   - Bar charts for item performance and outlet sales.
+   - Line charts for outlet establishment trends over time.
+
+---
+
+## **Key Insights**
+
+- **Total Sales**: $1.20M with an average sale of $141.
+- **Highest Performing Outlets**: Tier 3 locations with $472.13K sales.
+- **Top Product Categories**: Fruits and Snacks contribute $0.18M each.
+- **Outlet Size Performance**: Medium-sized outlets lead with $507.90K.
+
+---
+
+## **MySQL Queries**
+
+Below are the SQL queries used to generate the dataset for this dashboard:
+
+### **1. Total Sales**
+```sql
+SELECT 
+    SUM(sales_amount) AS total_sales,
+    AVG(sales_amount) AS avg_sales,
+    COUNT(item_id) AS total_items,
+    AVG(rating) AS avg_rating
+FROM sales_data;
+```
+
+### **2. Sales by Outlet Location**
+```sql
+SELECT 
+    outlet_location_type,
+    SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY outlet_location_type;
+```
+
+### **3. Sales by Outlet Size**
+```sql
+SELECT 
+    outlet_size,
+    SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY outlet_size;
+```
+
+### **4. Sales by Item Type**
+```sql
+SELECT 
+    item_type,
+    SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY item_type
+ORDER BY total_sales DESC;
+```
+
+### **5. Outlet Establishment Trends**
+```sql
+SELECT 
+    YEAR(establishment_year) AS year,
+    SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY YEAR(establishment_year)
+ORDER BY year ASC;
+```
+
+### **6. Fat Content by Outlet**
+```sql
+SELECT 
+    outlet_location_type,
+    fat_content,
+    SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY outlet_location_type, fat_content;
+```
+
+### **7. Outlet Performance Summary**
+```sql
+SELECT 
+    outlet_type,
+    SUM(sales_amount) AS total_sales,
+    COUNT(item_id) AS no_of_items,
+    AVG(sales_amount) AS avg_sales,
+    AVG(rating) AS avg_rating
+FROM sales_data
+GROUP BY outlet_type;
+```
+
+### **8. Top Performing Items**
+```sql
+SELECT 
+    item_type,
+    SUM(sales_amount) AS total_sales,
+    COUNT(item_id) AS total_items
+FROM sales_data
+GROUP BY item_type
+ORDER BY total_sales DESC
+LIMIT 10;
+```
+
+### **9. Sales by Fat Content**
+```sql
+SELECT 
+    fat_content,
+    SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY fat_content;
+```
+
+---
+
+## **Getting Started**
+
+### **Prerequisites**
+To view or edit the dashboard, ensure you have the following:
+- **Power BI Desktop**: [Blinkit dashboard](https://powerbi.microsoft.com/)
+- The `.pbix` file available in this repository.
+- Access to the database used for this project.
+
+---
+
+## **Usage**
+
+1. Use the filter panel to:
+   - Analyze sales by outlet location type (Tier 1, Tier 2, Tier 3).
+   - Compare performance based on outlet size.
+   - Drill down into item-level sales data.
+2. Review trends in outlet establishment and sales growth over time.
+3. Identify top-performing products and focus on customer preferences.
+
+---
+
+
+
+
+
+
+
+
